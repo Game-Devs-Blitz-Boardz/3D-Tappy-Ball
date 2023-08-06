@@ -39,4 +39,8 @@ public class Player : MonoBehaviour
             ObstacleSpawner.spawnerInstance.ScoreUp();
         }
     }
+
+    void OnBecameInvisible() {
+        GameOver();
+    }
 }
