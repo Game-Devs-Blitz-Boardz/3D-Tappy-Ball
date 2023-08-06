@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +20,23 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             rb.velocity = Vector3.up * jumpForce;
+        }
+    }
+
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Obstacle") {
+            GameOver();
+        }
+    }
+
+    void GameOver() {
+        SceneManager.LoadScene("Game");
+    }
+
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "ScoreChecker") {
+            ObstacleSpawner.spawnerInstance.ScoreUp();
         }
     }
 }
